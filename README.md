@@ -1,7 +1,7 @@
-Support Dropped
+About
 ======
 
-Dear all, the support is dropped and the plugin has not been updated for two years. Please see forks, you might have more chances.
+This is my fork of the LazyRoad plugin. It is intended primarily for bug fixes, but also adds a few new features as well.
 
 
 LazyRoad
@@ -15,7 +15,4 @@ Bugs/Suggestions: [LazyRoad Issues](https://github.com/creadri/LazyRoad/issues?s
 Compilation
 -----------
 
-We use maven to handle our dependencies.
-
-* Install [Maven 3](http://maven.apache.org/download.html)
-* Check out this repo and: `mvn clean install`
+I do not use maven to handle dependencies. I've kept the maven files for people who wish to continue using maven, however I will not be updating maven settings. Compile this however you'd like, it shouldn't be that complicated.

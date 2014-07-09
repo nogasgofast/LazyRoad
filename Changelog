@@ -1,0 +1,73 @@
+Version 0.8.2
+
+    Made road and pillar names case insensitive
+    Added tab completion
+    Fixed bug #22
+
+Version 0.8.1
+
+    Fixed /lt and /lb not working correctly 
+
+Version 0.8.0 Big update :D
+
+    New Feature: LazyMiner - For the people who want to get blocks that making a road replaces
+        Commands
+            /lazyminer : Enables or Disables LM.
+            /lazyminer ids : Displays the Ids that LM mines.
+            /lazyminer addid <BlockID> : Adds an id to that list.
+            /lazyminer removeid <BlockID> : Removes an id from that list.
+            /lazyminer store : Places your mined blocks in the chest you're looking at. 
+        Can add and remove new BlockIds for LM to save.
+        Can view currently set Ids LM checks for
+        Has permission node default op.
+        If the block's mined by LM, LR will not put that block in the undo.
+        Mined blocks, Checked Ids, and if LM is enabled is saved between sessions, so no worrying about server restarts and disconnects.
+            /reload s of the server may mess it up though. I'll fix this in 0.8.1. 
+    New Permissions
+        lazyroad.build : Still gives full access to LR and now gives permission for LazyMiner features too
+        lazyroad.user : Gives access to all the commands but not the roads or pillars, which bring me to the next 2 permissions.
+        lazyroad.road.<RoadName> : Gives access to just the road named in RoadName so permission for the 'Basic' road it would be lazyroad.road.basic
+        lazyroad.pillar.<PillarName> : Same as the road permission except for pillars not roads
+        So now you can limit your users to specific road and pillar types without removing them from the folders.
+        lazyroad.lazyminer : Gives permission to use the LazyMiner features 
+    Aliases for commands
+        /lr = /road
+        /lt = /tunnel
+        /lb = /bridge
+        /lm = /lazyminer 
+
+Version 0.7.6
+
+    Fixed Dependency problem with MineUtil classes not being included in the jar in v0.7.5. 
+
+Version 0.7.5
+
+    Fixed road not being built under stairs when you are ascending.
+    Added a "Wall" road and "Wall" Pillar to the default zips. defaultRoads.zip defaultPillars.zip 
+
+Version 0.7.4
+
+    Fixed the bug where the upside down data for stairs was not getting used. 
+
+Version 0.7.3
+
+    Added more items to rotate correctly.
+    Bug: Upside down stairs are not placing correctly. Found after release. 
+
+Version 0.7.2
+
+    Delete old config.yml if messages aren't working.
+    Added a new handler for placing items with directional data.
+        So upside down Stairs/Half Slabs are working.
+        Despencers, Wall Signs, Buttons, Pumpkins, Jack-O-Lanterns can be placed in the different directions.
+        Trapdoors and Fence Gates can be placed in every direction open or closed.
+        Diodes can be placed in all directions and with every different tick delay.
+        Pistons have had all directions added. 
+    Updated the blocks that Pillars and Walking ignore
+        Pillars additionally will replace lily pads, snow, ice, vines, and nether wart
+        Walking additionally ignores lily pads, vines and nether wart 
+    Added the ability to force the tunnel/bridge to go up or down.
+        You can do it while placing /road but it can trap you when going up.
+        To use when placing road you can do /[road|tunnel|bridge] [up|down|normal]
+        "normal" return the system to placing with out the forced direction. 
+    Removed the Update Advertiser.
