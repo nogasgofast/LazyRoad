@@ -30,13 +30,13 @@ public class roadCommand extends CommandHandler {
         }
         Player player = (Player) sender;
         String playerName = player.getName();
-        boolean tunnel = label.equalsIgnoreCase("tunnel") ? true : false;
-        boolean bridge = label.equalsIgnoreCase("bridge") ? true : false;
+        boolean tunnel = label.equalsIgnoreCase("tunnel");
+        boolean bridge = label.equalsIgnoreCase("bridge");
         LazyMiner lm = plugin.getLazyMiner(playerName);
 
         switch (args.length) {
             case 1:
-                if (getPermissions(sender, "lazyroad.stop") && args[0].equalsIgnoreCase("stop") || args[0].equalsIgnoreCase("end")) {
+                if (player.hasPermission("lazyroad.stop") && args[0].equalsIgnoreCase("stop") || args[0].equalsIgnoreCase("end")) {
                     /**
                      * SUB-COMMAND STOP
                      */
@@ -51,7 +51,7 @@ public class roadCommand extends CommandHandler {
                         }
                     }
                     return true;
-                } else if (getPermissions(sender, "lazyroad.up") && args[0].equalsIgnoreCase("up")) {
+                } else if (player.hasPermission("lazyroad.up") && args[0].equalsIgnoreCase("up")) {
                     /**
                      * SUB-COMMAND up
                      */
@@ -60,7 +60,7 @@ public class roadCommand extends CommandHandler {
                         player.sendMessage(plugin.getMessage("messages.forceUp"));
                     }
                     return true;
-                } else if (getPermissions(sender, "lazyroad.down") && args[0].equalsIgnoreCase("down")) {
+                } else if (player.hasPermission("lazyroad.down") && args[0].equalsIgnoreCase("down")) {
                     /**
                      * SUB-COMMAND down
                      */
@@ -69,7 +69,7 @@ public class roadCommand extends CommandHandler {
                         player.sendMessage(plugin.getMessage("messages.forceDown"));
                     }
                     return true;
-                } else if (getPermissions(sender, "lazyroad.normal") && args[0].equalsIgnoreCase("normal")) {
+                } else if (player.hasPermission("lazyroad.normal") && args[0].equalsIgnoreCase("normal")) {
                     /**
                      * SUB-COMMAND normal
                      */
@@ -78,7 +78,7 @@ public class roadCommand extends CommandHandler {
                         player.sendMessage(plugin.getMessage("messages.normal"));
                     }
                     return true;
-                } else if (getPermissions(sender, "lazyroad.reload") && args[0].equalsIgnoreCase("reload")) {
+                } else if (player.hasPermission("lazyroad.reload") && args[0].equalsIgnoreCase("reload")) {
                     /**
                      * SUB-COMMAND RELOAD
                      */
@@ -91,7 +91,7 @@ public class roadCommand extends CommandHandler {
                     player.sendMessage(plugin.getMessage("messages.reload"));
                     return true;
 
-                } else if (getPermissions(sender, "lazyroad.undo") && args[0].equalsIgnoreCase("undo")) {
+                } else if (player.hasPermission("lazyroad.undo") && args[0].equalsIgnoreCase("undo")) {
                     /**
                      * SUB-COMMAND UNDO
                      */
@@ -104,7 +104,7 @@ public class roadCommand extends CommandHandler {
                     }
                     return true;
 
-                } else if (getPermissions(sender, "lazyroad.straight") && args[0].equalsIgnoreCase("straight")) {
+                } else if (player.hasPermission("lazyroad.straight") && args[0].equalsIgnoreCase("straight")) {
                     /**
                      * SUB-COMMAND STRAIGHT
                      */
@@ -126,8 +126,8 @@ public class roadCommand extends CommandHandler {
                         /**
                          * Else it's a Build Road or Tunnel command
                          */
-                        if (getPermissions(sender, "lazyroad.build") || getPermissions(sender, "lazyroad.road." + args[0].toLowerCase())) {
-                            Road road = plugin.getRoads().get(args[0]);
+                        if (player.hasPermission("lazyroad.build") || player.hasPermission("lazyroad.road." + args[0].toLowerCase())) {
+                            Road road = plugin.getRoads().get(args[0].toLowerCase());
                             if (road == null) {
                                 player.sendMessage(plugin.getMessage("messages.noRoad"));
                                 return true;
@@ -160,14 +160,14 @@ public class roadCommand extends CommandHandler {
                 }
             case 2:
                 if (bridge) {
-                    if (getPermissions(sender, "lazyroad.build") || (getPermissions(sender, "lazyroad.road." + args[0]) && getPermissions(sender, "lazyroad.pillar." + args[1]))) {
-                        Road road = plugin.getRoads().get(args[0]);
+                    if (player.hasPermission("lazyroad.build") || (player.hasPermission("lazyroad.road." + args[0]) && player.hasPermission("lazyroad.pillar." + args[1]))) {
+                        Road road = plugin.getRoads().get(args[0].toLowerCase());
                         if (road == null) {
                             player.sendMessage(plugin.getMessage("messages.noRoad"));
                             return true;
                         }
 
-                        Pillar pillar = plugin.getPillars().get(args[1]);
+                        Pillar pillar = plugin.getPillars().get(args[1].toLowerCase());
                         if (pillar == null) {
                             player.sendMessage(plugin.getMessage("messages.noPillar"));
                             return true;
@@ -197,8 +197,8 @@ public class roadCommand extends CommandHandler {
                     /**
                      * Else it's a Build Road or Tunnel command
                      */
-                    if (getPermissions(sender, "lazyroad.build") || getPermissions(sender, "lazyroad.road." + args[0])) {
-                        Road road = plugin.getRoads().get(args[0]);
+                    if (player.hasPermission("lazyroad.build") || player.hasPermission("lazyroad.road." + args[0])) {
+                        Road road = plugin.getRoads().get(args[0].toLowerCase());
                         if (road == null) {
                             player.sendMessage(plugin.getMessage("messages.noRoad"));
                             return true;
@@ -235,14 +235,14 @@ public class roadCommand extends CommandHandler {
                 }
             case 3:
                 if (bridge) {
-                    if (getPermissions(sender, "lazyroad.build") || (getPermissions(sender, "lazyroad.road." + args[0]) && getPermissions(sender, "lazyroad.pillar." + args[1]))) {
-                        Road road = plugin.getRoads().get(args[0]);
+                    if (player.hasPermission("lazyroad.build") || (player.hasPermission("lazyroad.road." + args[0]) && player.hasPermission("lazyroad.pillar." + args[1]))) {
+                        Road road = plugin.getRoads().get(args[0].toLowerCase());
                         if (road == null) {
                             player.sendMessage(plugin.getMessage("messages.noRoad"));
                             return true;
                         }
 
-                        Pillar pillar = plugin.getPillars().get(args[1]);
+                        Pillar pillar = plugin.getPillars().get(args[1].toLowerCase());
                         if (pillar == null) {
                             player.sendMessage(plugin.getMessage("messages.noPillar"));
                             return true;

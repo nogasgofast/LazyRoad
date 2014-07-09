@@ -94,6 +94,8 @@ public class LazyRoadPlayerListener implements Listener {
                             break;
                         }
                     }
+                    if (pl == null)
+                    	return;
 
                     ObjectInputStream ois = new ObjectInputStream(new FileInputStream(pl));
 
@@ -110,9 +112,11 @@ public class LazyRoadPlayerListener implements Listener {
                 }
             }
         } catch (IOException iOException) {
-            plugin.log.warning("[LazyRoad] An error occured while opening the Miner file " + event.getPlayer().getName() + ".ser !");
+        	LazyRoad.log.warning("[LazyRoad] An error occured while opening the Miner file " + event.getPlayer().getName() + ".ser !");
         } catch (ClassNotFoundException ex) {
-            plugin.log.warning("[LazyRoad] An error occured while parsing the Miner file " + event.getPlayer().getName() + ".ser !");
+        	LazyRoad.log.warning("[LazyRoad] An error occured while parsing the Miner file " + event.getPlayer().getName() + ".ser !");
+        } catch (SecurityException e) {
+        	LazyRoad.log.warning("[LazyRoad] Permission denied while parsing the Miner file " + event.getPlayer().getName() + ".ser !");
         }
     }
 

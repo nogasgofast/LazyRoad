@@ -2,20 +2,18 @@ package com.creadri.lazyroad;
 
 import com.creadri.lazyroad.commands.LazyMinerCommand;
 import com.creadri.lazyroad.commands.roadCommand;
-import com.creadri.util.ColumnChat;
 import com.creadri.util.FileManager;
 import com.creadri.util.Messages;
 import java.io.*;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -119,6 +117,7 @@ public class LazyRoad extends JavaPlugin {
         }
         log.info("[LazyRoad] : Plugin disabled");
     }
+    
     /**
      * Handles the commands for the plugin.
      * @param sender
@@ -137,6 +136,63 @@ public class LazyRoad extends JavaPlugin {
             return false;
         }
     }
+    
+    /** 
+     * Handles tab completion 
+     */
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
+    	List<String> completions = new ArrayList<String>();
+    	
+    	if (
+			alias.equalsIgnoreCase("lr") || alias.equalsIgnoreCase("road") || 
+			alias.equalsIgnoreCase("lr") || alias.equalsIgnoreCase("tunnel") || 
+			alias.equalsIgnoreCase("lb") || alias.equalsIgnoreCase("bridge")
+    	) {
+    		if (args.length == 1) {
+	    		if ("reload".startsWith(args[0]))
+	    			completions.add("reload");
+	    		if ("stop".startsWith(args[0]))
+	    			completions.add("stop");
+	    		if ("undo".startsWith(args[0]))
+	    			completions.add("undo");
+	    		if ("straight".startsWith(args[0]))
+	    			completions.add("straight");
+	    		if ("up".startsWith(args[0]))
+	    			completions.add("up");
+	    		if ("down".startsWith(args[0]))
+	    			completions.add("down");
+	    		if ("normal".startsWith(args[0]))
+	    			completions.add("normal");
+	    		for (String string : roads.keySet()) {
+	    			if (string.startsWith(args[0]))
+	        			completions.add(string);
+	    		}
+    		}
+    		else if (args.length == 2 && (alias.equalsIgnoreCase("lb") || alias.equalsIgnoreCase("bridge"))) {
+    			for (String string : pillars.keySet()) {
+	    			if (string.startsWith(args[1]))
+	        			completions.add(string);
+	    		}
+    		}
+    	}
+    	
+    	else if (alias.equalsIgnoreCase("lm") || alias.equalsIgnoreCase("lazyminer")) {
+    		if (args.length == 1) {
+    			if ("ids".startsWith(args[0]))
+	    			completions.add("ids");
+    			if ("addid".startsWith(args[0]))
+	    			completions.add("addid");
+    			if ("removeid".startsWith(args[0]))
+	    			completions.add("removeid");
+    			if ("store".startsWith(args[0]))
+	    			completions.add("store");
+    		}
+    	}
+    	
+    	return completions;
+    }
+    
     /**
      * Loads the roads in the roads folder into the plugin.
      * @throws IOException
@@ -155,6 +211,7 @@ public class LazyRoad extends JavaPlugin {
             try {
                 name = f.getName();
                 name = name.substring(0, name.length() - 4);
+                name = name.toLowerCase();
 
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
 
@@ -187,6 +244,7 @@ public class LazyRoad extends JavaPlugin {
             try {
                 name = f.getName();
                 name = name.substring(0, name.length() - 4);
+                name = name.toLowerCase();
 
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
 

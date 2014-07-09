@@ -1,9 +1,9 @@
 main: com.creadri.lazyroad.LazyRoad
-version: ${project.version}
+version: 0.8.2
 name: LazyRoad
 description: Make roads as you walk
 author: adreide
-authors: [VeraLapsa]
+authors: [VeraLapsa, Z5T1]
 website: http://www.creadri.com
 commands:
   road:

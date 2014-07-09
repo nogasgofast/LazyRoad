@@ -16,7 +16,7 @@ public abstract class CommandHandler {
 
     public CommandHandler(LazyRoad plugin) {
         this.plugin = plugin;
-        log = plugin.log;
+        log = LazyRoad.log;
     }
 
     public abstract boolean perform(CommandSender sender, String label, String[] args);
@@ -54,8 +54,4 @@ public abstract class CommandHandler {
         }
     }
 
-    protected static boolean getPermissions(CommandSender sender, String node) {
-        Player player = (Player) sender;
-        return player.hasPermission(node);
-    }
 }

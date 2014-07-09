@@ -27,7 +27,7 @@ public class LazyMinerCommand extends CommandHandler {
             return true;
         }
         Player player = (Player) sender;
-        if (!getPermissions(sender, "lazyroad.lazyminer")) {
+        if (!player.hasPermission("lazyroad.lazyminer")) {
             player.sendMessage(plugin.getMessage("messages.noPermission"));
         }
         String playerName = player.getName();
